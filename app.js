@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const { adminRouter } = require("./route/admin");
 const { shopRouter } = require("./route/shop");
 
@@ -16,7 +17,8 @@ app.use(shopRouter);
 //handling 404 invalid route
 
 app.use((request,response, next)=>{
-    response.status(404).send('<h1>Page not found!!!, Try with valid one!!!</h1>')
+   // response.status(404).send('<h1>Page not found!!!, Try with valid one!!!</h1>')
+   response.status(404).sendFile(path.join(__dirname, "views", "404-page-not-found.html"));
 })
 
 //Server is listening in a port 5000
